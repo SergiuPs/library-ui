@@ -43,6 +43,12 @@
     margin: 0.5rem;
     display: inline-block;
   }
+
+  :disabled, :disabled:hover {
+    background-color: #e8e9eb;
+    cursor: default;
+    border: 0px;
+  }
   
   a:hover,
   a:active,

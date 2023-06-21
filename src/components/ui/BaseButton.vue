@@ -33,14 +33,14 @@
   button,
   a {
     text-decoration: none;
-    padding: 0.75rem 1.5rem;
+    padding: 0.5rem 1rem;
     font: inherit;
-    background-color: #3a0061;
-    border: 1px solid #3a0061;
-    color: white;
+    background-color: #9addfb;
+    border: 1px solid #9addfb;
+    color: black;
     cursor: pointer;
-    border-radius: 30px;
-    margin-right: 0.5rem;
+    border-radius: 20px;
+    margin: 0.5rem;
     display: inline-block;
   }
   
@@ -48,26 +48,18 @@
   a:active,
   button:hover,
   button:active {
-    background-color: #270041;
-    border-color: #270041;
+    background-color: #e6f6fe;
+    border-color: #9addfb;
   }
   
-  .flat {
-    background-color: transparent;
-    color: #3a0061;
-    border: none;
+  .image {
+    background-color: #fff;
+    border: 3px solid #9addfb;
   }
   
-  .outline {
-    background-color: transparent;
-    border-color: #270041;
-    color: #270041;
-  }
-  
-  .flat:hover,
-  .flat:active,
-  .outline:hover,
-  .outline:active {
-    background-color: #edd2ff;
+  .image:hover,
+  .image:active {
+    background-color: #e6f6fe;
+    border: 3px solid #000;
   }
   </style>

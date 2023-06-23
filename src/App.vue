@@ -10,6 +10,9 @@ export default {
   components: {
     TheHeader
   },
+  created() {
+    this.$store.dispatch('auth/tryLogin')
+  }
 }
 </script>
 

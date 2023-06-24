@@ -34,6 +34,7 @@ export default {
     
     localStorage.setItem('token', responseData.accessToken);
     localStorage.setItem('userId', user.getId());
+    localStorage.setItem('user', user);
     localStorage.setItem('tokenExpiration', expirationDate);
 
     timer = setTimeout(function() {
@@ -46,8 +47,9 @@ export default {
       user: user
     });
   },
-  tryLogin(context) {
+  async tryLogin(context) {
     const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
     const userId = localStorage.getItem('userId');
     const tokenExpiration = localStorage.getItem('tokenExpiration');
     const expiresIn = Date.parse(tokenExpiration) - Date.now();
@@ -63,7 +65,8 @@ export default {
     if (token && userId) {
       context.commit('setUser', {
         token: token,
-        userId: userId
+        userId: userId,
+        user: user
       });
     }
   },

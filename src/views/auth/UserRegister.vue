@@ -1,6 +1,6 @@
 <template>
     <div>
-      <base-card>
+      <base-card size="small-card">
         <h2>Register New User</h2>
         <base-dialog :show="!!error" title="An error occurred" @close="handleError">
           <p>{{ error }}</p>

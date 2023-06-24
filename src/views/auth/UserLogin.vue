@@ -6,7 +6,7 @@
       <base-dialog :show="isLoading" title="Authenticating..." fixed>
         <base-spinner></base-spinner>
       </base-dialog>
-      <base-card>
+      <base-card size="small-card">
         <form @submit.prevent="submitForm">
           <div class="form-control">
             <label for="username">Username</label>
@@ -51,7 +51,8 @@ export default {
 
       try {
         await this.$store.dispatch('auth/login', actionPayload);
-        const redirectUrl = '/' + (this.$route.query.redirect || '');
+        const redirectTo = this.$store.getters['auth/user'].isUser() ? '' : 'dashboard';
+        const redirectUrl = '/' + (this.$route.query.redirect || redirectTo);
         this.$router.replace(redirectUrl);
       } catch (err) {
         this.error = err.message || 'Failed to authenticate, try later.';

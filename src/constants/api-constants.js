@@ -5,5 +5,6 @@ export const RestApiConstants = {
 
     LOGIN: '/login',
     REGISTER: '/register',
-    ROLES: 'roles',
+    ROLES: '/roles',
+    USERS: '/users',
 }

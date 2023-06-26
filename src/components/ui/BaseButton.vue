@@ -62,10 +62,28 @@
     background-color: #fff;
     border: 3px solid #9addfb;
   }
+
+  .image-small {
+    background-color: #fff;
+    border: 2px solid #9addfb;
+    margin: 0;
+  }
   
   .image:hover,
   .image:active {
     background-color: #e6f6fe;
     border: 3px solid #000;
+  }
+
+  .flat {
+    border-radius: 10px;
+    background-color: #e6f6fe;
+    margin: 0px 0px 15px 0px;
+    padding: 0.5rem 3rem;
+  }
+  .flat:active, .flat:hover {
+    color: red;
+    font-size: 20px;
+    padding: 0.3rem 2.2rem;
   }
   </style>

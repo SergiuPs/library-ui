@@ -7,7 +7,7 @@
       <search-bar></search-bar>
     </div>
     <div class="right-header">
-      <base-button mode="flat">{{ buttonText }}</base-button>
+      <base-button  mode="flat" link :to="buttonLink">{{ buttonText }}</base-button>
     </div>
   </div>    
 </template>
@@ -17,7 +17,7 @@ import ItemsPerPageDropdown from './ItemsPerPageDropdown.vue';
 import SearchBar from './SearchBar.vue';
 export default {
   components: {ItemsPerPageDropdown, SearchBar},
-  props: ['buttonText']
+  props: ['buttonText', 'buttonLink']
 }
 </script>
 

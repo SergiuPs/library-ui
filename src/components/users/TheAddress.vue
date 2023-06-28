@@ -24,9 +24,9 @@
 </template>
 
 <script>
-import { Region } from '../constants/regions';
-import City from '../model/city';
-import Address from '../model/address';
+import { Region } from '@/constants/regions';
+import City from '@/model/city';
+import Address from '@/model/address';
 
 export default {
    data() {

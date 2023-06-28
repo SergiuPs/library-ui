@@ -27,5 +27,9 @@ export default class User extends BaseEntity {
 
     getLastName(){
       return this.lastName;
-    }        
+    }
+    
+    isUser() {
+      return this.roles.length == 1 && this.roles.find(e => e.name === 'ROLE_USER') != undefined;
+    }
 }

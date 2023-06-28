@@ -38,18 +38,20 @@
                             <img src="../../assets/user.png" alt="Logo" width="32" height="32" class="d-inline-block align-text-top">
                         </a>
                         <ul class="dropdown-menu">
-                            <li><router-link to="/login" class="dropdown-item">Login</router-link></li>
-                            <li><router-link to="/" class="dropdown-item">Register</router-link></li>
-                            <li><router-link to="/" class="dropdown-item">Placeholder</router-link></li>
+                            <li v-if="!isAuth"><router-link to="/login" class="dropdown-item">Login</router-link></li>
+                            <li v-if="!isAuth"><router-link to="/register" class="dropdown-item">Register</router-link></li>
+                            <li v-if="isAuth"><router-link to="/my-account" class="dropdown-item">My Account</router-link></li>
+							<li v-if="isAuth"><router-link to="/dashboard" class="dropdown-item">Dashboard</router-link></li>
+                            <li v-if="isAuth" @click="logout"><div class="dropdown-item">Logout</div></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link navbar-brand" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link navbar-brand" :href="redirectToLogin" role="button" :data-bs-toggle="disableDropDownForFavs" aria-expanded="false">
                             <img src="../../assets/favorite.png" alt="Logo" width="32" height="32" class="d-inline-block align-text-top">
                         </a>
-                        <ul class="dropdown-menu">
-                            <li><router-link to="/" class="dropdown-item">Placeholder</router-link></li>
-                            <li><router-link to="/" class="dropdown-item">Placeholder</router-link></li>
+                        <ul v-if="isAuth" class="dropdown-menu">
+                            <li><router-link to="/dashboard" class="dropdown-item">Placeholder</router-link></li>
+                            <li><router-link to="/confirm" class="dropdown-item">Placeholder</router-link></li>
                             <li><router-link to="/" class="dropdown-item">Placeholder</router-link></li>
                         </ul>
                     </li>
@@ -69,3 +71,36 @@
         </nav>
     </header>
 </template>
+
+<script>
+import { mapGetters } from 'vuex';
+export default {
+	computed: {
+    	...mapGetters({
+      		isLoggedIn: 'auth/isAuthenticated',
+			authenticatedUser: 'auth/user'
+    	}),
+    	isAuth() {
+      		return this.isLoggedIn;
+    	},
+    	disableDropDownForFavs() { //If user is not authenticated, the drop-down for favorites will be disabled ...
+      		if (this.isAuth) {
+        		return 'dropdown';
+      		}
+      		return '';
+    	},
+    	redirectToLogin() {
+      		if (this.isAuth) {
+        		return '#';
+      		}
+      		return '/login'; // ... and user redirected to login after clicking on favorites.
+    	},
+	},
+	methods: {
+		logout() {
+			this.$store.dispatch('auth/logout');
+			this.$router.replace('');
+    	}
+	}
+}
+</script>

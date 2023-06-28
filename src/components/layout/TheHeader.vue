@@ -76,31 +76,31 @@
 import { mapGetters } from 'vuex';
 export default {
 	computed: {
-    	...mapGetters({
-      		isLoggedIn: 'auth/isAuthenticated',
+		...mapGetters({
+			isLoggedIn: 'auth/isAuthenticated',
 			authenticatedUser: 'auth/user'
-    	}),
-    	isAuth() {
-      		return this.isLoggedIn;
-    	},
-    	disableDropDownForFavs() { //If user is not authenticated, the drop-down for favorites will be disabled ...
-      		if (this.isAuth) {
-        		return 'dropdown';
-      		}
-      		return '';
-    	},
-    	redirectToLogin() {
-      		if (this.isAuth) {
-        		return '#';
-      		}
-      		return '/login'; // ... and user redirected to login after clicking on favorites.
-    	},
+		}),
+		isAuth() {
+			return this.isLoggedIn;
+		},
+		disableDropDownForFavs() { //If user is not authenticated, the drop-down for favorites will be disabled ...
+			if (this.isAuth) {
+				return 'dropdown';
+			}
+			return '';
+		},
+		redirectToLogin() {
+			if (this.isAuth) {
+				return '#';
+			}
+			return '/login'; // ... and user redirected to login after clicking on favorites.
+		},
 	},
 	methods: {
 		logout() {
 			this.$store.dispatch('auth/logout');
 			this.$router.replace('');
-    	}
+		}
 	}
 }
 </script>

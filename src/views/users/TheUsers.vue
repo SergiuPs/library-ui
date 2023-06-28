@@ -1,7 +1,7 @@
 <template>
   <base-card size="big-card">
     <h2>The Users</h2>
-		<table-controls button-text="Add New User"></table-controls>
+		<table-controls button-text="Add New User" button-link="/register"></table-controls>
 		<table class="table table-striped table-light table-bordered">
 			<thead>
 				<tr class="table-dark">
@@ -46,11 +46,10 @@
 import { ApplicationConstants } from '../../constants/app-constants.js';
 import { RestApiConstants } from '@/constants/api-constants';
 import User from '@/model/user.js';
-import TableControls from '@/components/ui/TableControls.vue';
 import UserCard from './UserCard.vue';
 
 export default {
-	components: { TableControls, UserCard },
+	components: { UserCard },
 	provide() {
 		return {
 			newValueSelected: this.itemsPerPageChanged,

@@ -4,8 +4,7 @@ export default class City {
     region = null;
 
     constructor(name, region) {
-      this.name = name;
-      this.region = region;
-    }
-          
+		this.name = name;
+		this.region = region;
+    }         
 }

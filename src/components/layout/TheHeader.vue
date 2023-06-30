@@ -104,3 +104,14 @@ export default {
 	}
 }
 </script>
+
+<style scoped>
+header {
+    position:fixed; 
+    left:0; 
+    top:0;
+    width:100vw;
+    z-index:200;
+    height:60px;
+}
+</style>

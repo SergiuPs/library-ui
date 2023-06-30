@@ -15,7 +15,9 @@
 			</div>
 			<menu v-if="!fixed">
 				<slot name="actions">
-					<base-button @click="tryClose">Close</base-button>
+					<base-button v-if="closeButton" @click="tryClose('close')">Close</base-button>
+                    <base-button v-if="yesButton" @click="tryClose('yes')">Yes</base-button>
+                    <base-button v-if="cancelButton" @click="tryClose('cancel')">Cancel</base-button>
 				</slot>
 			</menu>
         </dialog>
@@ -39,14 +41,27 @@ export default {
 			required: false,
 			default: false,
 		},
+        closeButton: {
+			type: Boolean,
+			required: false,
+			default: true,
+		},
+        yesButton: {
+			type: Boolean,
+			required: false,
+		},
+		cancelButton: {
+			type: Boolean,
+			required: false,
+		},
     },
     emits: ['close'],
     methods: {
-		tryClose() {
+		tryClose(mode) {
 			if (this.fixed) {
 				return;
 			}
-			this.$emit('close');
+			this.$emit('close', mode);
 		},
 	},
 };

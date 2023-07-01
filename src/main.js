@@ -13,6 +13,7 @@ import BaseButton from './components/ui/BaseButton.vue';
 import BaseSpinner from './components/ui/BaseSpinner.vue';
 import BaseDialog from './components/ui/BaseDialog.vue';
 import TableControls from './components/ui/TableControls.vue';
+import EmptyTable from './components/ui/EmptyTable.vue';
 
 const app = createApp(App);
 
@@ -25,6 +26,7 @@ app.component('base-button', BaseButton);
 app.component('base-spinner', BaseSpinner);
 app.component('base-dialog', BaseDialog);
 app.component('table-controls', TableControls);
+app.component('empty-table', EmptyTable);
 
 
 app.mount('#app');

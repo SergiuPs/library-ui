@@ -51,8 +51,10 @@
 			<base-dialog :show="isInfoModalVisible" @close="closeInfoModal">
 				<user-card :user="userToBeDisplayed"></user-card>
 			</base-dialog>
-			<base-dialog :show="ifDeleteModalVisible" @close="closeDeleteModal" 
-			:close-button="false" :yes-button="true" :cancel-button="true">
+			<base-dialog 
+			:show="ifDeleteModalVisible" 
+			@close="closeDeleteModal" 
+			first-button-text="Yes" :second-button="true" second-button-text="Cancel">
 				{{ deleteModalMessage }}
 			</base-dialog>
 		</base-card>
@@ -237,7 +239,7 @@ export default {
 			this.ifDeleteModalVisible = true;
 		},
 		closeDeleteModal(mode) {
-			if (mode === 'yes') {
+			if (mode === 'Yes') {
 				this.deleteUser();
 			}
 			this.ifDeleteModalVisible = false;

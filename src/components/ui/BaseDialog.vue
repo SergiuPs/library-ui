@@ -15,9 +15,8 @@
 			</div>
 			<menu v-if="!fixed">
 				<slot name="actions">
-					<base-button v-if="closeButton" @click="tryClose('close')">Close</base-button>
-                    <base-button v-if="yesButton" @click="tryClose('yes')">Yes</base-button>
-                    <base-button v-if="cancelButton" @click="tryClose('cancel')">Cancel</base-button>
+					<base-button v-if="firstButton" @click="tryClose(firstButtonText)">{{ firstButtonText }}</base-button>
+                    <base-button v-if="secondButton" @click="tryClose(secondButtonText)">{{ secondButtonText }}</base-button>
 				</slot>
 			</menu>
         </dialog>
@@ -41,17 +40,22 @@ export default {
 			required: false,
 			default: false,
 		},
-        closeButton: {
+        firstButton: {
 			type: Boolean,
 			required: false,
 			default: true,
 		},
-        yesButton: {
+		firstButtonText: {
+			type: String,
+			required: false,
+			default: 'Close'
+		},
+        secondButton: {
 			type: Boolean,
 			required: false,
 		},
-		cancelButton: {
-			type: Boolean,
+		secondButtonText: {
+			type: String,
 			required: false,
 		},
     },
@@ -76,8 +80,7 @@ export default {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.75);
     z-index: 10;
-}
-  
+} 
 dialog {
     position: fixed;
     top: 10vh;
@@ -92,54 +95,44 @@ dialog {
     overflow: hidden;
     background-color: white;
 }
-
 .modalBody {
     overflow-y: auto;
     max-height: 600px;
-}
-  
+} 
 header {
     background-color: #e6f6fe;
     color: white;
     width: 100%;
     padding: 1rem;
-}
-  
+} 
 header h2 {
     margin: 0;
-}
-  
+} 
 section {
     padding: 1rem;
-}
-  
+} 
 menu {
     padding: 1rem;
     display: flex;
     justify-content: flex-end;
     margin: 0;
 }
-  
 .dialog-enter-from,
 .dialog-leave-to {
     opacity: 0;
     transform: scale(0.8);
 }
-  
 .dialog-enter-active {
     transition: all 0.3s ease-out;
 }
-  
 .dialog-leave-active {
     transition: all 0.3s ease-in;
 }
-  
 .dialog-enter-to,
 .dialog-leave-from {
     opacity: 1;
     transform: scale(1);
 }
-  
 @media (min-width: 768px) {
     dialog {
       left: calc(50% - 20rem);

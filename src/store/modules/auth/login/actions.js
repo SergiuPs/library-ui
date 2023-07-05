@@ -48,7 +48,7 @@ export default {
 	},
 	async tryLogin(context) {
 		const token = localStorage.getItem('token');
- 		if (token == null) {
+		if (token == null) {
 			return;
 		}
 

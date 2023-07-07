@@ -5,7 +5,7 @@
 		<dialog open v-if="show">
 			<header>
 				<slot name="header">
-					<h2>{{ title }}</h2>
+					<h5>{{ title }}</h5>
 				</slot>
 			</header>
 			<div class="modalBody">
@@ -16,7 +16,7 @@
 			<menu v-if="!fixed">
 				<slot name="actions">
 					<base-button v-if="firstButton" @click="tryClose(firstButtonText)">{{ firstButtonText }}</base-button>
-                    <base-button v-if="secondButton" @click="tryClose(secondButtonText)">{{ secondButtonText }}</base-button>
+					<base-button v-if="secondButton" @click="tryClose(secondButtonText)">{{ secondButtonText }}</base-button>
 				</slot>
 			</menu>
         </dialog>
@@ -101,11 +101,11 @@ dialog {
 } 
 header {
     background-color: #e6f6fe;
-    color: white;
+    color: black;
     width: 100%;
     padding: 1rem;
 } 
-header h2 {
+header h5 {
     margin: 0;
 } 
 section {

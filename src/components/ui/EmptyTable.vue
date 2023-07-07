@@ -1,6 +1,6 @@
 <template>
     <div class="no-data">
-		<base-spinner class="center-spinner" v-if="isLoading"></base-spinner>
+		<base-spinner type="spinner big" class="center-spinner" v-if="isLoading"></base-spinner>
 		<div v-else class="center-div">{{ noDataMessage }}</div>
 	</div>
 </template>

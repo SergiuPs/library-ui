@@ -30,7 +30,7 @@ select {
 	box-sizing: border-box;
 	padding: 0.5em 2em 0.5em 0.5em;
 	border: 1px solid #9addfb;
-	border-radius: 10px;
+	border-radius: 5px;
 	font: inherit;
 	line-height: inherit;
 	-webkit-appearance: none;

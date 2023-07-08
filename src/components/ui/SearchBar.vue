@@ -18,13 +18,13 @@ export default {
 .search-bar {
 	padding: 0.5em 2em 0.55em 0.5em;
   border: 1px solid #9addfb;
-	border-radius: 10px 0px 0px 10px;
+	border-radius: 5px 0px 0px 5px;
   margin-bottom: 15px;
 }
 .search-button {
   padding: 0.5em;
   border: 1px solid #9addfb;
-	border-radius: 0px 10px 10px 0px;
+	border-radius: 0px 5px 5px 0px;
   margin-bottom: 15px;
 }
 .search-bar:focus {

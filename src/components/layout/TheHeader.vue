@@ -91,23 +91,14 @@
                 </div>
             </div>
         </nav>
-        <base-dialog :first-button="false" :show="loginModalVisible" title="Login" >
-            <user-login @logged-in="closeLoginModal"></user-login>
-        </base-dialog>
     </header>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import UserLogin from '@/views/auth/UserLogin.vue';
 
 export default {
-    components: { UserLogin },
-    data() {
-        return {
-            loginModalVisible: false
-        }
-    },
+    inject: ['showLoginModal'],
 	computed: {
 		...mapGetters({
 			isLoggedIn: 'auth/isAuthenticated',
@@ -131,10 +122,7 @@ export default {
 	},
 	methods: {
         openLoginModal() {
-            this.loginModalVisible = true;
-        },
-        closeLoginModal() {
-            this.loginModalVisible = false;
+            this.showLoginModal();
         },
 		logout() {
 			this.$store.dispatch('auth/logout');

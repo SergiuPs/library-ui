@@ -1,12 +1,15 @@
 <template>
 	<teleport to="body">
-		<div v-if="show" @click="tryClose" class="backdrop"></div>
+		<div v-if="show" class="backdrop"></div>
 		<transition name="dialog">
 		<dialog open v-if="show">
 			<header>
 				<slot name="header">
 					<h5>{{ title }}</h5>
 				</slot>
+				<button class="clean-button" @click="close">
+					<font-awesome-icon class="fa-icon" icon="circle-xmark"/>
+				</button>
 			</header>
 			<div class="modalBody">
 				<section>
@@ -15,8 +18,8 @@
 			</div>
 			<menu v-if="!fixed">
 				<slot name="actions">
-					<base-button v-if="firstButton" @click="tryClose(firstButtonText)">{{ firstButtonText }}</base-button>
-					<base-button v-if="secondButton" @click="tryClose(secondButtonText)">{{ secondButtonText }}</base-button>
+					<base-button v-if="firstButton" @click="close(firstButtonText)">{{ firstButtonText }}</base-button>
+					<base-button v-if="secondButton" @click="close(secondButtonText)">{{ secondButtonText }}</base-button>
 				</slot>
 			</menu>
         </dialog>
@@ -61,10 +64,7 @@ export default {
     },
     emits: ['close'],
     methods: {
-		tryClose(mode) {
-			if (this.fixed) {
-				return;
-			}
+		close(mode) {
 			this.$emit('close', mode);
 		},
 	},
@@ -103,16 +103,25 @@ header {
     background-color: #e6f6fe;
     color: black;
     width: 100%;
-    padding: 1rem;
+    padding: 10px 30px;
+	display: flex; 
+	justify-content: space-between;
 } 
 header h5 {
-    margin: 0;
+    margin: auto 0;
+	
+	text-align: center;
+}
+.fa-icon {
+	width: 27px;
+	height: 27px;
+	margin-top: 5px;
 } 
 section {
-    padding: 1rem;
+    padding: 30px;
 } 
 menu {
-    padding: 1rem;
+    padding: 30px;
     display: flex;
     justify-content: flex-end;
     margin: 0;

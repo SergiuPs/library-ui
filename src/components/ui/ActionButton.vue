@@ -3,7 +3,7 @@
         <div class="flex-center">
 			<div class="text-center">
 				<div class="spinner-transition"> 
-				    <transition v-show="error" :css="animation">
+					<transition v-show="error" :css="animation">
 						<div class="message-box">{{ error }}</div>
 					</transition>
 					<div v-if="isLoading">

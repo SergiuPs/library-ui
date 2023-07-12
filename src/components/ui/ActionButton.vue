@@ -10,7 +10,7 @@
 						<base-spinner type="spinner small" class="m-auto"></base-spinner>
 					</div>
 				</div>
-				<base-button class="login-button">Login</base-button>
+				<base-button class="action-button" :disabled="buttonDisabled">{{ buttonName }}</base-button>
 			</div>
 		</div>
     </div>
@@ -18,12 +18,12 @@
 
 <script>
 export default {
-    props: ['error', 'animation', 'isLoading']
+    props: ['error', 'animation', 'isLoading', 'buttonName', 'buttonDisabled']
 }
 </script>
 
 <style scoped>
-.login-button {
+.action-button {
 	padding: 5px 50px;
 	margin: 0 auto;
 }

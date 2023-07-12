@@ -9,7 +9,10 @@
 				<input type="password" placeholder="Password" v-model.trim="password">
 				<font-awesome-icon class="input-icon" icon="key" />
 			</div>
-			<action-button :isLoading="isLoading" :error="error" :animation="animation"></action-button>
+			<action-button 
+			:isLoading="isLoading" 
+			:error="error" :animation="animation" 
+			button-name="Login"></action-button>
 		</form>
 	</div>
 </template>

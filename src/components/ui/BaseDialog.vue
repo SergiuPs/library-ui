@@ -4,24 +4,25 @@
 		<transition name="dialog">
 		<dialog open v-if="show">
 			<header>
-				<slot name="header">
-					<h5>{{ title }}</h5>
-				</slot>
 				<button class="clean-button" @click="close">
 					<font-awesome-icon class="fa-icon" icon="circle-xmark"/>
 				</button>
 			</header>
 			<div class="modalBody">
+				<slot name="header">
+					<h5>{{ title }}</h5>
+				</slot>
 				<section>
 					<slot></slot>
 				</section>
-			</div>
-			<menu v-if="!fixed">
+				<menu v-if="!fixed">
 				<slot name="actions">
 					<base-button v-if="firstButton" @click="close(firstButtonText)">{{ firstButtonText }}</base-button>
 					<base-button v-if="secondButton" @click="close(secondButtonText)">{{ secondButtonText }}</base-button>
 				</slot>
 			</menu>
+			</div>
+			
         </dialog>
       </transition>
     </teleport>
@@ -97,19 +98,19 @@ dialog {
 }
 .modalBody {
     overflow-y: auto;
-    max-height: 600px;
+    max-height: 750px;
 } 
 header {
     background-color: #e6f6fe;
     color: black;
     width: 100%;
-    padding: 10px 30px;
+    padding: 5px 15px;
 	display: flex; 
-	justify-content: space-between;
+	justify-content: flex-end;
 } 
-header h5 {
+h5 {
+	padding-top: 15px;
     margin: auto 0;
-	
 	text-align: center;
 }
 .fa-icon {
@@ -118,10 +119,10 @@ header h5 {
 	margin-top: 5px;
 } 
 section {
-    padding: 30px;
+    padding: 15px 30px 30px 30px;
 } 
 menu {
-    padding: 30px;
+    padding: 15px 30px;
     display: flex;
     justify-content: flex-end;
     margin: 0;

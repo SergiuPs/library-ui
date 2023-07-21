@@ -1,22 +1,9 @@
 export default class BaseEntity {
-    
-    id;
-    version;
-    createdBy;
-    updatedBy;
-    createdAt = null;
-    updatedAt = null;
+	id;
+	version;
 
-    constructor(id, version, createdBy, updatedBy, createdAt, updatedAt) {
-      this.id = id;
-      this.version = version;
-      this.createdBy = createdBy;
-      this.updatedBy = updatedBy;
-      this.createdAt = createdAt;
-      this.updatedAt = updatedAt;
-    }
-
-    getId() {
-      return this.id;
-    }
+	constructor(id, version) {
+		this.id = id;
+		this.version = version;
+	}
 }

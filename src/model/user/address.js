@@ -1,12 +1,15 @@
-export default class Address {
+import BaseEntity from "@/model/base-entity";
+
+export default class Address extends BaseEntity {
 	recipient = null;
-    street = "";
-    zip = "";
+    street;
+    zip;
     city = null;
 	defaultBillingAddress = false;
 	defaultShippingAddress = false;
 
-    constructor(recipient, street, zip, city, defBill, defShip) {
+    constructor(id, version, recipient, street, zip, city, defBill, defShip) {
+		super(id, version);
 		this.recipient = recipient;
 		this.street = street;
 		this.zip = zip;

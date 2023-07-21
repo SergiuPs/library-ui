@@ -1,10 +1,12 @@
-export default class City {
+import BaseEntity from "@/model/base-entity";
 
-    name = "";
-    region = null;
+export default class City extends BaseEntity {
+	name;
+	region = null;
 
-    constructor(name, region) {
+	constructor(id, version, name, region) {
+		super(id, version);
 		this.name = name;
 		this.region = region;
-    }         
+	}         
 }

@@ -1,9 +1,12 @@
-export default class Recipient {
-	title = null;
-    firstName = '';
-    lastName = '';
+import BaseEntity from "@/model/base-entity";
 
-    constructor(title, firstName, lastName) {
+export default class Recipient extends BaseEntity {
+	title = null;
+    firstName;
+    lastName;
+
+    constructor(id, version, title, firstName, lastName) {
+        super(id, version);
 		this.title = title;
         this.firstName = firstName;
         this.lastName = lastName;

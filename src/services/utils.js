@@ -53,13 +53,15 @@ function createOpsForAddress(newAddress, addresses, index, defaultBillingChecked
     operations.push(opForNewAddress);
 
     let indexOfDefBilling;
-	if (defaultChanged(numberOfAddresses, defaultBillingChecked, addresses[index].defaultBillingAddress)) {
+    let oldDefaultBillingValue = index ? addresses[index].defaultBillingAddress : false;
+	if (defaultChanged(numberOfAddresses, defaultBillingChecked, oldDefaultBillingValue)) {
 		indexOfDefBilling = addresses.findIndex(el => el.defaultBillingAddress == true);
         const op = createOpForDefaultAddress(indexOfDefBilling, addresses, "defaultBillingAddress")
         operations.push(op);
 	}
 
-    if (defaultChanged(numberOfAddresses, defaultShippingChecked, addresses[index].defaultShippingAddress)) {
+    let oldDefaultShippingValue = index ? addresses[index].defaultShippingAddress : false;
+    if (defaultChanged(numberOfAddresses, defaultShippingChecked, oldDefaultShippingValue)) {
 		const indexOfDefShipping = addresses.findIndex(el => el.defaultShippingAddress == true);
 		if (indexOfDefShipping != indexOfDefBilling) {
             const op = createOpForDefaultAddress(indexOfDefShipping, addresses, "defaultShippingAddress")

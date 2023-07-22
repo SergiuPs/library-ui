@@ -1,4 +1,4 @@
-export  { getRolesAndPermissions, createOpsForPatch }
+export  { getRolesAndPermissions, createOpsForPatch, createOpsForAddress }
 
 function getRolesAndPermissions(authorities) {
     const authoritiesArray = authorities.split(',');
@@ -17,7 +17,7 @@ function getRolesAndPermissions(authorities) {
 }
 
 function createOpsForPatch(object, array) {
-    const ops = [];
+    const operations = [];
 
     for (const [key, value] of array) {
         let op;
@@ -39,8 +39,67 @@ function createOpsForPatch(object, array) {
                 operation.value = value;
             }
     
-            ops.push(operation);
+            operations.push(operation);
         }
     }
-    return ops;
+    return operations
+}
+
+function createOpsForAddress(newAddress, addresses, index, defaultBillingChecked, defaultShippingChecked) { 
+    const numberOfAddresses = addresses.length;
+    const operations = [];
+
+	const opForNewAddress = createOpForNewAddress(newAddress, index, numberOfAddresses);
+    operations.push(opForNewAddress);
+
+    let indexOfDefBilling;
+	if (defaultChanged(numberOfAddresses, defaultBillingChecked, addresses[index].defaultBillingAddress)) {
+		indexOfDefBilling = addresses.findIndex(el => el.defaultBillingAddress == true);
+        const op = createOpForDefaultAddress(indexOfDefBilling, addresses, "defaultBillingAddress")
+        operations.push(op);
+	}
+
+    if (defaultChanged(numberOfAddresses, defaultShippingChecked, addresses[index].defaultShippingAddress)) {
+		const indexOfDefShipping = addresses.findIndex(el => el.defaultShippingAddress == true);
+		if (indexOfDefShipping != indexOfDefBilling) {
+            const op = createOpForDefaultAddress(indexOfDefShipping, addresses, "defaultShippingAddress")
+            operations.push(op);
+        } else {
+            operations[1].value.defaultShippingAddress = false;
+        }
+	}
+
+    return operations
+}
+
+function createOpForNewAddress(newAddress, index, numberOfAddresses) {
+    let opName, path;
+    if (index >= 0) {
+		opName = "replace";
+		path = "/addresses/" + index
+	} else {
+		opName = "add";
+		path = "/addresses/" + numberOfAddresses
+	}
+
+	return {
+        "op" : opName,
+        "path" : path,
+        "value" : newAddress
+    }
+}
+
+function defaultChanged(numberOfAddresses, defaultChecked, oldValue) {
+    return numberOfAddresses > 1 && defaultChecked && !oldValue;
+}
+
+function createOpForDefaultAddress(indexOfDefault, addresses, type) {
+    const oldDefaultAddress = addresses[indexOfDefault];
+	oldDefaultAddress[type] = false;
+	const operation = {
+        "op" : "replace",
+        "path" : "/addresses/" + indexOfDefault,
+        "value" : oldDefaultAddress
+    }
+    return operation;
 }

@@ -4,6 +4,31 @@ import { RestApiConstants } from '@/constants/api-constants';
 import { getRolesAndPermissions } from '@/services/utils';
 
 export default {
+	async register(context, payload) {
+
+		const url = RestApiConstants.HOST_AND_API_VERSION + RestApiConstants.REGISTER;
+
+		let headers = {
+			"Content-Type": "application/json",
+		};
+   
+		if (context.getters['auth/isAuthenticated']) {
+			headers['Authorization'] = localStorage.getItem('token');
+		}
+
+		const response = await fetch(url, {
+			method: 'POST',
+			body: JSON.stringify(payload.newUser),
+			headers: headers
+		});
+
+		const responseData = await response.json();
+
+		if (!response.ok) {
+			const error = new Error(responseData.message || 'Failed to register.');
+			throw error;
+		}
+	},
 	async login(context, payload) {
 		let url = RestApiConstants.HOST_AND_API_VERSION + RestApiConstants.LOGIN;
 
@@ -17,9 +42,8 @@ export default {
 				"Content-Type": "application/json",
 			},
 		});
-
+		
 		const responseData = await response.json();
-
 		if (!response.ok) {
 			throw new Error(
 				responseData.message || 'Failed to authenticate. Check your login data.'
@@ -32,7 +56,6 @@ export default {
 		const expiresIn = expirationDate - Date.now();
 
 		localStorage.setItem('token', responseData.accessToken);
-		localStorage.setItem('userId', responseData.userId);
 		localStorage.setItem('tokenExpiration', expirationDate);
 
 		timer = setTimeout(function() {
@@ -41,7 +64,7 @@ export default {
 
 		context.commit('setUser', {
 			token: responseData.accessToken,
-			userId: responseData.userId,
+			userId: jwtPayload.userId,
 			roles: rolesAndPermissions[0],
 			permissions: rolesAndPermissions[1]
 		});
@@ -54,7 +77,6 @@ export default {
 
 		const jwtPayload = JSON.parse(window.atob(token.split('.')[1]));
 		const rolesAndPermissions = getRolesAndPermissions(jwtPayload.authorities);
-		const userId = localStorage.getItem('userId');
 		const tokenExpiration = localStorage.getItem('tokenExpiration');
 		const expiresIn = Date.parse(tokenExpiration) - Date.now();
 
@@ -66,10 +88,10 @@ export default {
 					context.dispatch('autoLogout');
 				}, expiresIn);
 
-		if (token && userId) {
+		if (token) {
 			context.commit('setUser', {
 				token: token,
-				userId: userId,
+				userId: jwtPayload.userId,
 				roles: rolesAndPermissions[0],
 				permissions: rolesAndPermissions[1]
 			});

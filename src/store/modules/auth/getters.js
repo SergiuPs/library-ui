@@ -1,25 +1,25 @@
 export default {
-    userId(state) {
+	userId(state) {
 		return state.userId;
-    },
-    token(state) {
+	},
+	token(state) {
 		return state.token;
-    },
-    isAuthenticated(state) {
+	},
+	isAuthenticated(state) {
 		return !!state.token;
-    },
-    didAutoLogout(state) {
+	},
+	didAutoLogout(state) {
 		return state.didAutoLogout;
-    },
-    authenticatedHasRoleHigherThanUser(state) {
+	},
+	authenticatedHasRoleHigherThanUser(state) {
 		return state.roles.length > 1;
-    },
-    authenticatedHasPermission(state) {
+	},
+	authenticatedHasPermission(state) {
 		return (value) => {
 			if (state.permissions.includes(value)) {
 				return true;
 			} 
 			return false;	
 		}
-    }
+	}
 };

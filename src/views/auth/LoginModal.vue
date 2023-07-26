@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import ForgottenPassword from './ForgottenPassword.vue';
+import PasswordForgotten from './PasswordForgotten.vue';
 import LoginForm from './LoginForm.vue';
 
 export default {
-	components: { LoginForm, ForgottenPassword },
+	components: { LoginForm, PasswordForgotten },
 	inject: ['changeModalTitle'],
 	data() {
 		return {
@@ -23,9 +23,9 @@ export default {
 			if (this.selectedComponent === 'login-form') {
 				this.changeModalTitle('Reset your password');
 				this.urlText = 'Back to Login';
-				this.selectedComponent = 'forgotten-password';
+				this.selectedComponent = 'password-forgotten';
 			} else {
-				this.changeModalTitle('Welcome back');
+				this.changeModalTitle('Welcome');
 				this.urlText = 'Forgotten your password?';
 				this.selectedComponent = 'login-form';
 			}

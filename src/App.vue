@@ -3,40 +3,45 @@
 		<the-header class="header"></the-header>
 		<div style="height: 60px;"></div>
 		<router-view class="router"/>
-		<base-dialog :first-button="false" :show="loginModalVisible" title="Login" >
-			<user-login @logged-in="closeModal"></user-login>
+		<base-dialog :first-button="false" :fixed="true" :show="loginModalVisible" :title="title" @close="closeLoginModal">
+			<login-modal></login-modal>
 		</base-dialog>
 	</div>
 </template>
 
 <script>
 import TheHeader from './components/layout/TheHeader.vue';
-import UserLogin from '@/views/auth/UserLogin.vue';
+import LoginModal from '@/views/auth/LoginModal.vue';
 
 export default {
-	components: { TheHeader, UserLogin },
+	components: { TheHeader, LoginModal },
 	provide() {
 		return {
-			closeLoginModal: this.closeModal,
-			showLoginModal: this.showModal
+			closeLoginModal: this.closeLoginModal,
+			showLoginModal: this.showLoginModal,
+			changeModalTitle: this.changeModalTitle
 		}
 	},
 	data() {
 		return {
-			loginModalVisible: false
+			loginModalVisible: false,
+			title: "Welcome"
 		}
 	},
 	methods: {
-		showModal() {
+		showLoginModal() {
 			this.loginModalVisible = true;
 		},
-		closeModal() {
+		closeLoginModal() {
 			this.loginModalVisible = false;
+		},
+		changeModalTitle(title) {
+			this.title = title;
 		}
 	},
 	created() {
 		this.$store.dispatch('auth/tryLogin')
-	}
+	},
 }
 </script>
 
@@ -105,10 +110,6 @@ nav a.router-link-exact-active {
 	padding: 0;
 	overflow: hidden;
 }
-.flex-right {
-	display: flex;
-	justify-content: right;
-}
 .margin-tb-auto {
 	margin-bottom: auto; 
 	margin-top: auto;
@@ -139,8 +140,30 @@ nav a.router-link-exact-active {
 	display: flex;
 	justify-content: center;
 }
+.flex-right {
+	display: flex;
+	justify-content: right;
+}
+.flex-left {
+	display: flex;
+	justify-content: left;
+}
+.flex-stretch {
+	flex-basis: 100%;
+}
+.clean-button {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
 /*Form inputs with icon*/
-.input-group > input {
+.input-group > input,
+.input-group > select,
+.input-group > select option {
 	width: 100%;
 	padding: 13px;
 	line-height: 1;
@@ -182,6 +205,7 @@ nav a.router-link-exact-active {
 	padding-left: 4.4em;
 }
 .input-group-icon .input-icon {
+	position: absolute;
 	top: 0;
 	left: 0;
 	width: 22px;

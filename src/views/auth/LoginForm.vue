@@ -40,7 +40,6 @@ export default {
 				this.error = 'Please enter a valid username/email and password (at least 8 characters long)';
 				setTimeout(() => { 	
 					this.error = null;
-					this.isLoading = false;
 				}, 4000);
 				return;
 			}
@@ -63,7 +62,6 @@ export default {
 				this.error = err.message || 'Failed to authenticate, try later.';
 				setTimeout(() => {	
 					this.error = null;
-					this.isLoading = false;
 				}, 4000);
 			}
 			this.isLoading = false;

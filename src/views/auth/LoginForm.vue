@@ -19,7 +19,7 @@
 
 <script>
 export default {
-	emits: ['loggedIn'],
+    inject: ['closeLoginModal'],
 	data() {
 		return {
 			username: '',
@@ -33,12 +33,14 @@ export default {
 		async submitForm() {
 			this.animation = false;
 			this.error = null;
+			this.isLoading = false;
 
 			if (this.username === '' || this.password.length < 8) {
 				this.animation = true;
 				this.error = 'Please enter a valid username/email and password (at least 8 characters long)';
-				setTimeout(() => { 
+				setTimeout(() => { 	
 					this.error = null;
+					this.isLoading = false;
 				}, 4000);
 				return;
 			}
@@ -55,19 +57,17 @@ export default {
 				const redirectTo = this.$store.getters['auth/authenticatedHasRoleHigherThanUser'] ? 'dashboard' : '';
 				const redirectUrl = '/' + (this.$route.query.redirect || redirectTo);
 				this.$router.replace(redirectUrl);
-				this.$emit('loggedIn')
+				this.closeLoginModal();
 			} catch (err) {
 				this.animation = true;
 				this.error = err.message || 'Failed to authenticate, try later.';
-				setTimeout(() => { 
+				setTimeout(() => {	
 					this.error = null;
+					this.isLoading = false;
 				}, 4000);
 			}
 			this.isLoading = false;
-		},
-		handleError() {
-			this.error = null;
-		},
+		}
 	},
 };
 </script>

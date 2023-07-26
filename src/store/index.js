@@ -1,16 +1,13 @@
 import { createStore } from "vuex";
 
-
-import loginModule from './modules/auth/login/index.js';
-import registerModule from './modules/auth/register/index.js';
+import authModule from './modules/auth/index.js';
 
 export default createStore({
-  state: {},
-  getters: {},
-  mutations: {},
-  actions: {},
-  modules: {
-    auth: loginModule,
-    register: registerModule
-  },
+	state: {},
+	getters: {},
+	mutations: {},
+	actions: {},
+	modules: {
+		auth: authModule,
+	},
 });

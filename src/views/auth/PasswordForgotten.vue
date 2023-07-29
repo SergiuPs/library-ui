@@ -8,7 +8,9 @@
 			</div>
 			<action-button 
 			:isLoading="isLoading" 
-			:error="error" :animation="animation" 
+			:error="error"
+			:animation="animation"
+			mode="medium-center" 
 			button-name="Get reset link"></action-button>
 		</form>
         <div v-else> 

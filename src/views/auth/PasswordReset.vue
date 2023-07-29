@@ -14,7 +14,8 @@
 				<action-button 
 				:error="error" 
 				:isLoading="isLoading" 
-				:animation="animation" 
+				:animation="animation"
+				mode="medium-center" 
 				button-name="Save">
 				</action-button>
 			</form>

@@ -10,7 +10,7 @@
 						<base-spinner type="spinner small" class="m-auto"></base-spinner>
 					</div>
 				</div>
-				<base-button class="action-button" :disabled="buttonDisabled">{{ buttonName }}</base-button>
+				<base-button :mode="mode" :disabled="buttonDisabled">{{ buttonName }}</base-button>
 			</div>
 		</div>
     </div>
@@ -18,15 +18,11 @@
 
 <script>
 export default {
-    props: ['error', 'animation', 'isLoading', 'buttonName', 'buttonDisabled']
+    props: ['error', 'animation', 'isLoading', 'buttonName', 'buttonDisabled', 'mode']
 }
 </script>
 
 <style scoped>
-.action-button {
-	padding: 5px 50px;
-	margin: 0 auto;
-}
 .v-leave-active {
 	transition: opacity 2s ease;
 }

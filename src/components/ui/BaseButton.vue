@@ -37,7 +37,7 @@ export default {
 <style scoped>
 button, a {
 	text-decoration: none;
-	padding: 4px 30px;
+	padding: 2px 30px;
 	font: inherit;
 	font-size: 15px;
 	background-color: #e6f6fe;
@@ -84,6 +84,10 @@ a:hover, a:active, button:hover, button:active {
 .danger {
 	background-color: #ffe5e5;
 	border: 2px solid #ffb2b2;
+}
+.medium-center {
+	padding: 2px 75px;
+	margin: 0 auto;
 }
 .long {
 	width: 100%;

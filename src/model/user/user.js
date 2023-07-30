@@ -16,7 +16,7 @@ export default class User extends BaseEntity {
 		this.email = other.email;
 		this.firstName = other.firstName;
 		this.lastName = other.lastName;
-		this.birthDate = other.birthDate;
+		this.birthDate = new Date(other.birthDate);
 		this.avatar = other.avatar;
 		this.addresses = other.addresses;
 		this.roles = other.roles;

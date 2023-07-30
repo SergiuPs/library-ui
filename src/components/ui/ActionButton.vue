@@ -1,24 +1,22 @@
 <template>
-    <div> 
-        <div class="flex-center">
-			<div class="text-center">
-				<div class="spinner-transition"> 
-					<transition v-show="error" :css="animation">
-						<div class="message-box">{{ error }}</div>
-					</transition>
-					<div v-if="isLoading">
-						<base-spinner type="spinner small" class="m-auto"></base-spinner>
-					</div>
+	<div> 
+		<div class="text-center">
+			<div class="spinner-transition"> 
+				<transition v-show="error" :css="animation">
+					<div class="message-box">{{ error }}</div>
+				</transition>
+				<div v-if="isLoading">
+					<base-spinner type="spinner small" class="m-auto"></base-spinner>
 				</div>
-				<base-button :mode="mode" :disabled="buttonDisabled">{{ buttonName }}</base-button>
 			</div>
+			<base-button :mode="mode" :disabled="disabled">{{ buttonName }}</base-button>
 		</div>
-    </div>
+	</div>
 </template>
 
 <script>
 export default {
-    props: ['error', 'animation', 'isLoading', 'buttonName', 'buttonDisabled', 'mode']
+	props: ['error', 'animation', 'isLoading', 'buttonName', 'disabled', 'mode']
 }
 </script>
 
@@ -32,13 +30,13 @@ export default {
 .message-box {
 	background-color: #FFE1E1;
 	border-radius: 10px;
-	margin-top: 7px;
-	height: 25px;
+	height: 21px;
+	font-size: 13px;
 	text-align: center;
 	min-width: 200px;
 }
 .spinner-transition {
-	height: 35px;
-	margin-top: 7px;
+	height: 25px;
+	margin-top: 5px;
 }
 </style>

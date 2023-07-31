@@ -1,4 +1,4 @@
-export  { createOpsForObject, createOpsForAddress }
+export  { createOpsForObject, createOpsForDates, createOpsForAddress }
 
 /**
  * Create patch operations for simple object (containing no object/array values).
@@ -15,18 +15,56 @@ function createOpsForObject(oldValues, newValues) {
 			op = "add"
 		} else if (oldValues[key] && !value) {
 			op = "remove"
-		} else if (oldValues[key] != value) {
+		} else if (oldValues[key] !== value ) {
 			op = "replace"
-		}
+		} 
 
 		if (op) {
 			const operation = {
 				"op": op,
 				"path": "/" + key,
 			}
-
 			if (op != "remove") {
 				operation.value = value;
+			}
+			operations.push(operation);
+		}
+	}
+	return operations
+}
+
+/**
+ * Create patch operations for date objects
+ * @param {*} oldDates
+ * @param {*} newDates
+ * @param {*} onlyDate (boolean) If time part should be skipped
+ * @returns 
+ */
+function createOpsForDates(oldDates, newDates, onlyDate) {
+	const operations = [];
+
+	for (const [key, value] of Object.entries(newDates)) {
+		let op;
+		if (!oldDates[key] && value) {
+			op = "add"
+		} else if (oldDates[key] && !value) {
+			op = "remove"
+		} else if (oldDates[key].getTime() !== value.getTime()) {
+			op = "replace"
+		} 
+
+		if (op) {
+			const operation = {
+				"op": op,
+				"path": "/" + key,
+			}
+			if (op != "remove") {
+				if (onlyDate) {
+					const dateWithoutTime = value.toLocaleDateString("en-GB", {year: "numeric",}) +
+									'-' + value.toLocaleDateString("en-GB", {month: "2-digit",}) +
+									'-' + value.toLocaleDateString("en-GB", {day: "2-digit",});
+					operation.value = dateWithoutTime;
+				}
 			}
 			operations.push(operation);
 		}
@@ -55,9 +93,12 @@ function createOpsForAddress(address, addresses, index, defaultBillingIsChecked,
 	}
 	operations.push(opForNewAddress);
 
-	//If not first address, check for default billing/shipping (first will be saved with both true)
+	//If not first address, check if default billing/shipping changed and create ops for old default addresses (first will be saved with both true)
 	if (addresses.length !== 0 && (defaultBillingIsChecked || defaultShippingIsChecked)) { 
-		const operationsForOldDefaultAddreses = createOpsForOldDefaultAddresses(addresses, index, defaultBillingIsChecked, defaultShippingIsChecked);
+		const operationsForOldDefaultAddreses = createOpsForOldDefaultAddresses(addresses, 
+																				index, 
+																				defaultBillingIsChecked, 
+																				defaultShippingIsChecked);
 		operations.push(...operationsForOldDefaultAddreses);
 	}
 

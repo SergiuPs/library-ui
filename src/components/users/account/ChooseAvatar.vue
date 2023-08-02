@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { ApplicationConstants } from '@/constants/app-constants';
+import { FileStorageConstants } from '@/constants/file-storage-constants';
 import TheAvatars from '@/components/users/account/TheAvatars.vue';
 
 export default {
@@ -54,7 +54,7 @@ export default {
 			if (this.currentAvatar.startsWith('local')) {
 				return require(`@/assets/avatars${fileName}`)
 			} else {
-				return ApplicationConstants.FILE_STORAGE_AVATARS_PATH + fileName;
+				return FileStorageConstants.CLOUD_STORAGE_USER_AVATARS_PATH + fileName;
 			}
 		}
 	},

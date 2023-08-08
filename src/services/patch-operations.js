@@ -1,4 +1,17 @@
-export  { createOpsForObject, createOpsForDates, createOpsForAddress }
+export  { createOpForField, createOpsForObject, createOpsForDates, createOpsForAddress }
+
+function createOpForField(opName, fieldName, value) {
+	let op = {
+		"op": opName,
+		"path": '/' + fieldName
+	};
+
+	if (op != "remove") {
+		op.value = value;
+	}
+
+	return op;
+}
 
 /**
  * Create patch operations for simple object (containing no object/array values).

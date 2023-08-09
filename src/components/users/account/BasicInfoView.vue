@@ -6,7 +6,7 @@
 					<div class="user-info-block"> 
 						<font-awesome-icon class="user-info-icon" icon="user"/>
 						<span class="user-info-label">Username:</span>
-						<span>{{ username }}</span>
+						<span class="user-info-text">{{ username }}</span>
 					</div>
 					<div class="user-info-block">
 						<font-awesome-icon class="user-info-icon" icon="cake-candles"/>

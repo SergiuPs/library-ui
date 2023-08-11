@@ -1,5 +1,5 @@
 <template>
-	<div> 
+	<div class="m-se-10"> 
 		<div class="user-info-wrapper"> 
 			<div class="margin-tb-auto"> 
 				<div class="grid-half"> 
